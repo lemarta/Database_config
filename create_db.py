@@ -31,30 +31,18 @@ except (OperationalError, errors.DuplicateDatabase):
 else:
     cursor.close()
     cnx.close()
-
-try:
-    cnx = connect(host='localhost', user='postgres', password='coderslab', database='db_workshop')
-    cnx.autocommit = True
-    cursor = cnx.cursor()
-    cursor.execute(sql_users)
-    print('Users table created successfully')
-except (OperationalError, errors.DuplicateTable):
-    print('Error - database not created')
-else:
-    cursor.close()
-    cnx.close()
-
-try:
-    cnx = connect(host='localhost', user='postgres', password='coderslab', database='db_workshop')
-    cnx.autocommit = True
-    cursor = cnx.cursor()
-    cursor.execute(sql_messages)
-    print('Users table created successfully')
-except (OperationalError, errors.DuplicateTable):
-    print('Error - database not created')
-else:
-    cursor.close()
-    cnx.close()
+for table in (sql_users, sql_messages):
+    try:
+        cnx = connect(host='localhost', user='postgres', password='coderslab', database='db_workshop')
+        cnx.autocommit = True
+        cursor = cnx.cursor()
+        cursor.execute(table)
+        print('Users table created successfully')
+    except (OperationalError, errors.DuplicateTable):
+        print('Error - table not created')
+    else:
+        cursor.close()
+        cnx.close()
 
 
 
