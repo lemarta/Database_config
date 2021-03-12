@@ -1,4 +1,4 @@
-from psycopg2 import connect
+from psycopg2 import connect, OperationalError, errors
 
 sql_create_database = "CREATE DATABASE db_workshop"
 
@@ -25,8 +25,9 @@ try:
     cursor = cnx.cursor()
     cursor.execute(sql_create_database)
     print('Database created successfully')
-except Operational Error:
+except (OperationalError, errors.DuplicateDatabase):
     print('Error - database not created')
+
 else:
     cursor.close()
     cnx.close()
@@ -37,7 +38,7 @@ try:
     cursor = cnx.cursor()
     cursor.execute(sql_users)
     print('Users table created successfully')
-except Operational Error:
+except (OperationalError, errors.DuplicateTable):
     print('Error - database not created')
 else:
     cursor.close()
@@ -49,7 +50,7 @@ try:
     cursor = cnx.cursor()
     cursor.execute(sql_messages)
     print('Users table created successfully')
-except Operational Error:
+except (OperationalError, errors.DuplicateTable):
     print('Error - database not created')
 else:
     cursor.close()
