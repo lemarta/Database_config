@@ -12,6 +12,7 @@ PRIMARY KEY(id)
 sql_messages = """CREATE TABLE messages (
 id serial NOT NULL,
 PRIMARY KEY(id),
+text text,
 from_id int NOT NULL,
 FOREIGN KEY(from_id) REFERENCES users(id),
 to_id int NOT NULL,
