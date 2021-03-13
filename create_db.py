@@ -27,10 +27,10 @@ try:
     print('Database created successfully')
 except (OperationalError, errors.DuplicateDatabase):
     print('Error - database not created')
-
 else:
     cursor.close()
     cnx.close()
+
 for table in (sql_users, sql_messages):
     try:
         cnx = connect(host='localhost', user='postgres', password='coderslab', database='db_workshop')
